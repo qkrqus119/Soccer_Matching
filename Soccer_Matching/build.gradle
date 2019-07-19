@@ -40,6 +40,8 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-jdbc', version: "$springVersion"
     compile group: 'mysql', name: 'mysql-connector-java', version: "$mysqlVersion"
     compile group: 'org.apache.commons', name: 'commons-dbcp2', version: "$dbcp2Version"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "$jacksonVersion"
+    
       
 
     // Use JUnit test framework

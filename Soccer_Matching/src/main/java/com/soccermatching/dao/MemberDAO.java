@@ -10,4 +10,10 @@ public interface MemberDAO {
 
 	public MemberDTO read(int number);
 
+	public void create(MemberDTO memberDTO);
+
+	public void update(String name, String pwd, int gender, String cphone, String birthday, String email, int number);
+
+	public void delete(int number);
+
 }
