@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.soccermatching.dao.MemberDAO;
 import com.soccermatching.dao.MemberDAOImpl;
 import com.soccermatching.dto.MemberDTO;
 
@@ -14,7 +15,7 @@ import com.soccermatching.dto.MemberDTO;
 public class MemberRegisterController {
 
 	@Autowired
-	private MemberDAOImpl memberDAOImpl;
+	private MemberDAO memberDAO;
 
 	@GetMapping
 	public String get() {
@@ -28,7 +29,7 @@ public class MemberRegisterController {
 		
 		memberDTO.setGender(gender);
 
-		memberDAOImpl.create(memberDTO);
+		memberDAO.create(memberDTO);
 
 		return "redirect:/index";
 	}

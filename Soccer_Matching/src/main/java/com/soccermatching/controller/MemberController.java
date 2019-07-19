@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.soccermatching.dao.MemberDAO;
 import com.soccermatching.dao.MemberDAOImpl;
 import com.soccermatching.dto.MemberDTO;
 
@@ -21,16 +22,16 @@ import com.soccermatching.dto.MemberDTO;
 public class MemberController {
 
 	@Autowired
-	private MemberDAOImpl memberDAOImpl;
+	private MemberDAO memberDAO;
 
 	@GetMapping
 	public List<MemberDTO> getAll(Model model) {
-		return memberDAOImpl.readAll();
+		return memberDAO.readAll();
 	}
 
 	@GetMapping("/{number}")
 	public MemberDTO getOne(@PathVariable("number") int number) {
-		return memberDAOImpl.read(number);
+		return memberDAO.read(number);
 	}
 	
 	@PutMapping("/{number}")
@@ -42,12 +43,12 @@ public class MemberController {
 		String birthday = (String) map.get("birthday");
 		String email = (String) map.get("email");
 		
-		memberDAOImpl.update(pwd, name, gender, cphone, birthday, email, number);
+		memberDAO.update(pwd, name, gender, cphone, birthday, email, number);
 	}
 	
 	@DeleteMapping("/{number}")
 	public void remove(@PathVariable("number") int number) {
-		memberDAOImpl.delete(number);
+		memberDAO.delete(number);
 	}
 
 }
