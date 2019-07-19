@@ -36,7 +36,11 @@ repositories {
 
 dependencies {
     providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: "$servletVersion"
-    compile group: 'org.springframework', name: 'spring-webmvc', version: "$springVersion"    
+    compile group: 'org.springframework', name: 'spring-webmvc', version: "$springVersion"
+    compile group: 'org.springframework', name: 'spring-jdbc', version: "$springVersion"
+    compile group: 'mysql', name: 'mysql-connector-java', version: "$mysqlVersion"
+    compile group: 'org.apache.commons', name: 'commons-dbcp2', version: "$dbcp2Version"
+      
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
