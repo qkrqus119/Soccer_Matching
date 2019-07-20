@@ -1,6 +1,5 @@
 package com.soccermatching.dao;
 
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +13,9 @@ public interface MatchBoardDAO {
 
 	public void create(MatchBoardDTO matchBoardDTO);
 
-	public void update(Date gameDate, LocalTime gameStartTime, String gameType, int gameGenderType, String placeName,
-			String address, String Content, Date registerDate, int number);
+	public void update(String address, String detailAddress, String placeName, Date date, String startTime,
+			String startTimeMinute, String endTime, String endTimeMinutes, String gameType, String gender,
+			String numberAppliable, String detailInfo, String x, String y, Date registerDate, int number);
 
 	public void delete(int number);
 

@@ -1,6 +1,6 @@
 package com.soccermatching.dto;
 
-public class MatchApply {
+public class MatchApplyDTO {
 	private int memberNumber;
 	private int matchBoardNumber;
 
