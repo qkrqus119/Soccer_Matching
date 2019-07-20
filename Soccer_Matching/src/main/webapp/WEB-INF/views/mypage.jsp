@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
   
 <!DOCTYPE html>
 <html lang="en">
@@ -35,12 +37,23 @@
     <div id="header">
         <div id="title">풋살 매칭 관리</div>
         <div class="dropdown">
-            <div id="idSection">
+            <!-- <div id="idSection">
                 <span id="id">이원희</span><span> 님 환영합니다</span>&nbsp;&nbsp;&nbsp;&nbsp;
             </div>
             <div class="dropdown-content">
                 <a href="#">내정보 수정</a>
                 <a href="#">로그아웃</a>
+            </div> -->
+            <div id="idSection">
+                <sec:authorize access="isAuthenticated()">
+						<li>
+                        <span><sec:authentication property="principal.username"/></span><span> 님 환영합니다</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </li>
+					</sec:authorize>
+            </div>
+            <div class="dropdown-content">
+                <a href="#">내정보 수정</a>
+                <a href="logout">로그아웃</a>
             </div>
         </div>
     </div>

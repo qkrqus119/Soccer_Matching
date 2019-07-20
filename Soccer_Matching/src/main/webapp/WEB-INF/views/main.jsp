@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,9 +44,19 @@
             <div id="addMatch"><button type="button" class="btn btn-primary active" onclick="window.location.href='match-register'" style="font-size:1.5rem; width:200px;">매치 등록하기</button></div>
             <nav id="secondHeader">
                 <ul id="navHeader">
-                    <li>
+                    <!-- <li>
                         <a href="#" data-toggle="modal" data-target="#matchModal" style="color:black">로그인</a>
+                    </li> -->
+                    <sec:authorize access="isAnonymous()">
+						<li>
+                        <a href="/login" data-toggle="modal" data-target="#matchModal" style="color:black">로그인</a>
                     </li>
+					</sec:authorize>
+					<sec:authorize access="isAuthenticated()">
+						<li>
+                        <a href="profile" style="color:black"><sec:authentication property="principal.username"/></a>
+                    </li>
+					</sec:authorize>
                     <li>
                         <a href="register" style="color:black">회원가입</a>
                     </li>
