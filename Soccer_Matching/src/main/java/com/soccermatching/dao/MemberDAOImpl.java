@@ -1,5 +1,6 @@
 package com.soccermatching.dao;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,16 +31,18 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void create(MemberDTO memberDTO) {
 		jdbcTemplate.update(
-				"insert into member (id, pwd, name, gender, cphone, birthday, email) values (?, ?, ?, ?, ?, ?, ?)",
-				memberDTO.getId(), memberDTO.getPwd(), memberDTO.getName(), memberDTO.getGender(),
+				"insert into member (id, password, name, gender, cphone, birthday, email) values (?, ?, ?, ?, ?, ?, ?)",
+				memberDTO.getId(), memberDTO.getPassword(), memberDTO.getName(), memberDTO.getGender(),
 				memberDTO.getCphone(), memberDTO.getBirthday(), memberDTO.getEmail());
 	}
-
+	
 	@Override
-	public void update(String pwd, String name, int gender, String cphone, String birthday, String email, int number) {
+	public void update(String password, String name, String gender, String cphone, Date birthday,String email,
+			int number) {
 		jdbcTemplate.update(
-				"update member set pwd = ?, name = ?, gender = ?, cphone = ?, birthday = ?, email = ? where number = ?",
-				pwd, name, gender, cphone, birthday, email, number);
+				"update member set password = ?, name = ?, gender = ?, cphone = ?, birthday = ?, email = ? where number = ?",
+				password, name, gender, cphone, birthday, email, number);
+		
 	}
 
 	@Override
@@ -53,11 +56,13 @@ public class MemberDAOImpl implements MemberDAO {
 			memberDTO.setBirthday(rs.getString("birthday"));
 			memberDTO.setCphone(rs.getString("cphone"));
 			memberDTO.setEmail(rs.getString("email"));
-			memberDTO.setGender(rs.getInt("gender"));
+			memberDTO.setEnabled(rs.getInt("enabled"));
+			memberDTO.setGender(rs.getString("gender"));
 			memberDTO.setId(rs.getString("id"));
 			memberDTO.setName(rs.getString("name"));
 			memberDTO.setNumber(rs.getInt("number"));
-			memberDTO.setPwd(rs.getString("pwd"));
+			memberDTO.setPassword(rs.getString("password"));
+			memberDTO.setRole(rs.getString("role"));
 
 			return memberDTO;
 		}
