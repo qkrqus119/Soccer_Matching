@@ -46,7 +46,7 @@
                         <a href="#" data-toggle="modal" data-target="#matchModal" style="color:black">로그인</a>
                     </li>
                     <li>
-                        <a href="/register" style="color:black">회원가입</a>
+                        <a href="register" style="color:black">회원가입</a>
                     </li>
                 </ul>
             </nav>

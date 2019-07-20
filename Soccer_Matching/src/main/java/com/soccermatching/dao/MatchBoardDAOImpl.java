@@ -21,18 +21,18 @@ public class MatchBoardDAOImpl implements MatchBoardDAO {
 
 	@Override
 	public List<MatchBoardDTO> readAll() {
-		return jdbcTemplate.query("select * from board", new MatchBoardDTOMapper());
+		return jdbcTemplate.query("select * from match_board", new MatchBoardDTOMapper());
 	}
 
 	@Override
 	public MatchBoardDTO read(int number) {
-		return jdbcTemplate.queryForObject("select * from board where number = ?", new MatchBoardDTOMapper(), number);
+		return jdbcTemplate.queryForObject("select * from match_board where number = ?", new MatchBoardDTOMapper(), number);
 	}
 
 	@Override
 	public void create(MatchBoardDTO matchBoardDTO) {
 		jdbcTemplate.update(
-				"insert into board (author, address, detail_address, place_name, date, start_time, start_time_minutes, end_time, end_time_minutes, game_type, gender, number_appliable, x, y) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				"insert into match_board (author, address, detail_address, place_name, date, start_time, start_time_minutes, end_time, end_time_minutes, game_type, gender, number_appliable, x, y) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				matchBoardDTO.getAuthor(), matchBoardDTO.getAddress(), matchBoardDTO.getDetailAddress(),
 				matchBoardDTO.getPlaceName(), matchBoardDTO.getDate(), matchBoardDTO.getStartTime(),
 				matchBoardDTO.getStartTimeMinutes(), matchBoardDTO.getEndTime(), matchBoardDTO.getEndTimeMinutes(),
@@ -42,19 +42,19 @@ public class MatchBoardDAOImpl implements MatchBoardDAO {
 
 	@Override
 	public void update(String address, String detailAddress, String placeName, Date date, String startTime,
-			String startTimeMinute, String endTime, String endTimeMinutes, String gameType, String gender,
-			String numberAppliable, String detailInfo, String x, String y, Date registerDate, int number) {
+			String startTimeMinutes, String endTime, String endTimeMinutes, String gameType, String gender,
+			String numberAppliable, String detailInfo, String x, String y, int number) {
 
 		jdbcTemplate.update(
-				"update match_board set address = ?, detail_address = ?, place_name = ?, date = ?, start_time = ?, start_time_minutes = ?, end_time = ?, end_time_minutes = ?, game_type = ?, gender = ?, number_appliable = ?, detail_info, x = ?, y = ?, register_date = ? where number = ?",
-				address, detailAddress, placeName, date, startTime, startTimeMinute, endTime, endTimeMinutes, gameType,
-				gender, numberAppliable, detailInfo, x, y, registerDate, number);
+				"update match_board set address = ?, detail_address = ?, place_name = ?, date = ?, start_time = ?, start_time_minutes = ?, end_time = ?, end_time_minutes = ?, game_type = ?, gender = ?, number_appliable = ?, detail_info, x = ?, y = ? where number = ?",
+				address, detailAddress, placeName, date, startTime, startTimeMinutes, endTime, endTimeMinutes, gameType,
+				gender, numberAppliable, detailInfo, x, y, number);
 
 	}
 
 	@Override
 	public void delete(int number) {
-		jdbcTemplate.update("delete from board where number = ?", number);
+		jdbcTemplate.update("delete from match_board where number = ?", number);
 	}
 
 	public final class MatchBoardDTOMapper implements RowMapper<MatchBoardDTO> {
@@ -71,7 +71,7 @@ public class MatchBoardDAOImpl implements MatchBoardDAO {
 			matchBoardDTO.setGender(rs.getString("gender"));
 			matchBoardDTO.setNumber(rs.getInt("number"));
 			matchBoardDTO.setNumberAppliable(rs.getString("number_appliable"));
-			matchBoardDTO.setPlaceName(rs.getString("place_number"));
+			matchBoardDTO.setPlaceName(rs.getString("place_name"));
 			matchBoardDTO.setRegisterDate(rs.getDate("register_date"));
 			matchBoardDTO.setStartTime(rs.getString("start_time"));
 			matchBoardDTO.setStartTimeMinutes(rs.getString("start_time_minutes"));

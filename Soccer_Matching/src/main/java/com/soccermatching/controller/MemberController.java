@@ -1,5 +1,6 @@
 package com.soccermatching.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class MemberController {
 	private MemberDAO memberDAO;
 
 	@GetMapping
-	public List<MemberDTO> getAll(Model model) {
+	public List<MemberDTO> getAll() {
 		return memberDAO.readAll();
 	}
 
@@ -36,14 +37,14 @@ public class MemberController {
 	
 	@PutMapping("/{number}")
 	public void modify(@PathVariable("number") int number, @RequestBody Map<String, Object> map) {
-		String pwd = (String) map.get("pwd");
+		String password = (String) map.get("password");
 		String name = (String) map.get("name");
-		int gender = (int) map.get("gender");
+		String gender = (String) map.get("gender");
 		String cphone = (String) map.get("cphone");
-		String birthday = (String) map.get("birthday");
+		Date birthday = (Date) map.get("birthday");
 		String email = (String) map.get("email");
 		
-		memberDAO.update(pwd, name, gender, cphone, birthday, email, number);
+		memberDAO.update(password, name, gender, cphone, birthday, email, number);
 	}
 	
 	@DeleteMapping("/{number}")

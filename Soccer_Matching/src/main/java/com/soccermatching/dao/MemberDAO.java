@@ -1,6 +1,6 @@
 package com.soccermatching.dao;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import com.soccermatching.dto.MemberDTO;
