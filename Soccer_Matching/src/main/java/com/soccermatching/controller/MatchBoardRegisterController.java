@@ -18,7 +18,7 @@ public class MatchBoardRegisterController {
 	
 	@GetMapping
 	public String get() {
-		return "match_board";
+		return "match_register";
 	}
 	
 	@PostMapping

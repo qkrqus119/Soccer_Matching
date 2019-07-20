@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!--JQuery.css-->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="resources/css/member-register.css">
     <!--Bootstrap Jquery.min.js-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!--Proper.js-->
@@ -23,61 +24,6 @@
     <!-- JQuery UI -->
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
-    <style>
-        * {
-            font-family: 'Jua';
-        }
-        
-        label {
-            font-size: 20px;
-        }
-        
-        .header {
-            font-size: 40px;
-            font-weight: bold;
-            text-align: center;
-            height: 10vh;
-            line-height: 10vh;
-        }
-        
-        #section {
-            height: 75vh;
-        }
-        
-        .btn_check {
-            display: inline-block;
-            margin-top: 33px;
-            background-color: grey;
-            border: 0px;
-        }
-        
-        #id {
-            display: inline;
-        }
-        
-        #id_check {
-            margin-top: 36px;
-        }
-        
-        #footer {
-            width: 100%;
-            height: 10vh;
-            background-color: grey;
-            line-height: 10vh;
-            text-align: center;
-        }
-        
-        #datepicker:hover {
-            cursor: pointer;
-        }
-        
-        .ui-datepicker-trigger {
-            width: 35px;
-            height: 35px;
-            margin-left: 10px;
-        }
-    </style>
 
 </head>
 
@@ -106,7 +52,7 @@
                             <div class="row">
                                 <div class="col-md">
                                     <label for="id">아이디</label>
-                                    <input type="text" class="form-control" id="id" placeholder="아이디는 20자 이하" maxlength=20 required>
+                                    <input type="text" class="form-control" id="id" name="id" placeholder="아이디는 20자 이하" maxlength=20 required>
                                     <div class="invalid-feedback">반드시 입력하셔야 합니다.</div>
                                 </div>
                                 <div class="col-md">
@@ -199,7 +145,8 @@
                     <div class="col-md-3"></div>
                 </div>
                 </form>
-                </div>
+        </div>
+        
 
         <!-- 로그인 Modal -->
         <!-- The Modal -->
@@ -263,8 +210,8 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="Register.js"></script>
-    <script type="text/javascript" src="Datepicker.js"></script>
+    <script type="text/javascript" src="resources/js/member_register.js"></script>
+    <script type="text/javascript" src="resources/js/member_datepicker.js"></script>
 </body>
 
 </html>
