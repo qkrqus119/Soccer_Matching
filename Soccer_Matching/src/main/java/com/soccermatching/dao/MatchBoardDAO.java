@@ -14,8 +14,8 @@ public interface MatchBoardDAO {
 	public void create(MatchBoardDTO matchBoardDTO);
 
 	public void update(String address, String detailAddress, String placeName, Date date, String startTime,
-			String startTimeMinute, String endTime, String endTimeMinutes, String gameType, String gender,
-			String numberAppliable, String detailInfo, String x, String y, Date registerDate, int number);
+			String startTimeMinutes, String endTime, String endTimeMinutes, String gameType, String gender,
+			String numberAppliable, String detailInfo, String x, String y, int number);
 
 	public void delete(int number);
 
