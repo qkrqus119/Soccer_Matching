@@ -3,12 +3,14 @@ package com.soccermatching.dto;
 public class MemberDTO {
 	private int number;
 	private String id;
-	private String pwd;
+	private String password;
 	private String name;
-	private int gender;
+	private String gender;
 	private String cphone;
 	private String birthday;
 	private String email;
+	private int enabled;
+	private String role;
 
 	public int getNumber() {
 		return number;
@@ -26,12 +28,12 @@ public class MemberDTO {
 		this.id = id;
 	}
 
-	public String getPwd() {
-		return pwd;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPwd(String pwd) {
-		this.pwd = pwd;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getName() {
@@ -42,11 +44,11 @@ public class MemberDTO {
 		this.name = name;
 	}
 
-	public int getGender() {
+	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(int gender) {
+	public void setGender(String gender) {
 		this.gender = gender;
 	}
 
@@ -74,10 +76,27 @@ public class MemberDTO {
 		this.email = email;
 	}
 
+	public int getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
-		return "MemberDTO [number=" + number + ", id=" + id + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender
-				+ ", cphone=" + cphone + ", birthday=" + birthday + ", email=" + email + "]";
+		return "MemberDTO [number=" + number + ", id=" + id + ", password=" + password + ", name=" + name + ", gender="
+				+ gender + ", cphone=" + cphone + ", birthday=" + birthday + ", email=" + email + ", enabled=" + enabled
+				+ ", role=" + role + "]";
 	}
 
 }

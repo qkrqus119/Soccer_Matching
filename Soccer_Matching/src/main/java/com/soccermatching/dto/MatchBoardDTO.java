@@ -1,18 +1,24 @@
 package com.soccermatching.dto;
 
-import java.time.LocalTime;
-import java.util.Date;
+import java.sql.Date;
 
 public class MatchBoardDTO {
 	private int number;
 	private int author;
-	private Date gameDate;
-	private LocalTime gameStartTime;
-	private String gameType;
-	private int gameGenderType;
-	private String placeName;
 	private String address;
-	private String content;
+	private String detailAddress;
+	private String placeName;
+	private Date date;
+	private String startTime;
+	private String startTimeMinutes;
+	private String endTime;
+	private String endTimeMinutes;
+	private String gameType;
+	private String gender;
+	private String numberAppliable;
+	private String detailInfo;
+	private String x;
+	private String y;
 	private Date registerDate;
 
 	public int getNumber() {
@@ -31,36 +37,20 @@ public class MatchBoardDTO {
 		this.author = author;
 	}
 
-	public Date getGameDate() {
-		return gameDate;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setGameDate(Date gameDate) {
-		this.gameDate = gameDate;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public LocalTime getGameStartTime() {
-		return gameStartTime;
+	public String getDetailAddress() {
+		return detailAddress;
 	}
 
-	public void setGameStartTime(LocalTime gameStartTime) {
-		this.gameStartTime = gameStartTime;
-	}
-
-	public String getGameType() {
-		return gameType;
-	}
-
-	public void setGameType(String gameType) {
-		this.gameType = gameType;
-	}
-
-	public int getGameGenderType() {
-		return gameGenderType;
-	}
-
-	public void setGameGenderType(int gameGenderType) {
-		this.gameGenderType = gameGenderType;
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
 	}
 
 	public String getPlaceName() {
@@ -71,20 +61,92 @@ public class MatchBoardDTO {
 		this.placeName = placeName;
 	}
 
-	public String getAddress() {
-		return address;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public String getContent() {
-		return content;
+	public String getStartTime() {
+		return startTime;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getStartTimeMinutes() {
+		return startTimeMinutes;
+	}
+
+	public void setStartTimeMinutes(String startTimeMinutes) {
+		this.startTimeMinutes = startTimeMinutes;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getEndTimeMinutes() {
+		return endTimeMinutes;
+	}
+
+	public void setEndTimeMinutes(String endTimeMinutes) {
+		this.endTimeMinutes = endTimeMinutes;
+	}
+
+	public String getGameType() {
+		return gameType;
+	}
+
+	public void setGameType(String gameType) {
+		this.gameType = gameType;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getNumberAppliable() {
+		return numberAppliable;
+	}
+
+	public void setNumberAppliable(String numberAppliable) {
+		this.numberAppliable = numberAppliable;
+	}
+
+	public String getDetailInfo() {
+		return detailInfo;
+	}
+
+	public void setDetailInfo(String detailInfo) {
+		this.detailInfo = detailInfo;
+	}
+
+	public String getX() {
+		return x;
+	}
+
+	public void setX(String x) {
+		this.x = x;
+	}
+
+	public String getY() {
+		return y;
+	}
+
+	public void setY(String y) {
+		this.y = y;
 	}
 
 	public Date getRegisterDate() {
@@ -97,9 +159,12 @@ public class MatchBoardDTO {
 
 	@Override
 	public String toString() {
-		return "BoardDTO [number=" + number + ", author=" + author + ", gameDate=" + gameDate + ", gameStartTime="
-				+ gameStartTime + ", gameType=" + gameType + ", gameGenderType=" + gameGenderType + ", placeName="
-				+ placeName + ", address=" + address + ", content=" + content + ", registerDate=" + registerDate + "]";
+		return "MatchBoardDTO [number=" + number + ", author=" + author + ", address=" + address + ", detailAddress="
+				+ detailAddress + ", placeName=" + placeName + ", date=" + date + ", startTime=" + startTime
+				+ ", startTimeMinutes=" + startTimeMinutes + ", endTime=" + endTime + ", endTimeMinutes="
+				+ endTimeMinutes + ", gameType=" + gameType + ", gender=" + gender + ", numberAppliable="
+				+ numberAppliable + ", detailInfo=" + detailInfo + ", x=" + x + ", y=" + y + ", registerDate="
+				+ registerDate + "]";
 	}
 
 }
