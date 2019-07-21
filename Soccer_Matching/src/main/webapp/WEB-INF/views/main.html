@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +8,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- 기본 css-->
-    <link rel="stylesheet" href="resources/css/soccer-style.css">
+    <link rel="stylesheet" href="css/soccer-style.css">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -23,10 +20,9 @@
     <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Jua&display=swap" rel="stylesheet">
 
     <!-- services 라이브러리 불러오기 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b187315c60d45782c7546f0eaf4d3bc&libraries=services"></script>
     <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b187315c60d45782c7546f0eaf4d3bc&libraries=services,clusterer,drawing"></script>
-
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
@@ -53,8 +49,8 @@
         </header>
 
         <!-- 로그인 Modal -->
-        <!-- The Modal -->
-        <div class="modal fade" id="matchModal">
+        
+        <!-- The Modal --><div class="modal fade" id="matchModal">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
 
@@ -126,36 +122,44 @@
                         </li>
                     </ul>
                 </div>
-                <div class="contents">
-                    <div class="matchTime" style="font-size:25px;">13:00</div>
-                    <div class="matchContent">
-                        <p class="matchTitle" style="font-size:22px;margin-bottom:0px;">용산 아이파크 몰 3구장</p>
-                        <p class="matchOther"><span>남성매치 </span><span> 누구나</span></p>
-                    </div>
-                </div>
-                <div class="contents">
-                    <div class="matchTime" style="font-size:25px;">15:00</div>
-                    <div class="matchContent">
-                        <p class="matchTitle" style="font-size:22px;margin-bottom:0px;">용산 아이파크 몰 2구장</p>
-                        <p class="matchOther"><span>남성매치 </span><span> 누구나</span></p>
-                    </div>
-                </div>
-                <div class="contents">
-                    <div class="matchTime" style="font-size:25px;">13:00</div>
-                    <div class="matchContent">
-                        <p class="matchTitle" style="font-size:22px;margin-bottom:0px;">목동 크라우드</p>
-                        <p class="matchOther"><span>남성매치 </span><span> 누구나</span></p>
-                    </div>
-                </div>
+                <div is="short-content" v-for="match in matches" v-bind:key="match.number" v-bind:number = "match.number" v-bind:gender="match.gender" v-bind:time="match.time" v-bind:title="match.title"></div>
             </div>
         </section>
 
         <footer>조원 : 임홍휘, 김성규, 박상준, 김현민, 이원희</footer>
     </div>
-
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6b187315c60d45782c7546f0eaf4d3bc"></script>
-    <script type="text/javascript" src="resources/js/main-map.js"></script>
-    <script type="text/javascript" src="resources/js/basic.js"></script>
+	
+    
+    <script type="text/javascript" src="js/main-map.js"></script>
+    <script type="text/javascript" src="js/basic.js"></script>
+    <script>
+    	var matches = [
+    		{number: 1, title : "이문동 이마트",  time: "13:00", gender:"남성", y:37, x: 127}, 
+    		{number: 2, title : "용산 아이파크 몰 	3구장", time: "15:00", gender:"남성", y:37, x: 127},
+    		{number: 3, title : "용산 아이파크 몰 2구장", time: "13:00", gender:"남성", y:37, x: 127},
+    		{number: 4, title : "용산 아이파크 몰 1구장", time: "19:00", gender:"누구나", y:37, x: 127},
+    	];
+    	
+    	Vue.component('short-content',{
+    		template: "<div class='contents' onclick='detailShow(this)'><div class='matchTime' style='font-size: 25px;'>{{time}}</div><div class='matchContent'><p class='matchTitle' style='font-size:22px;margin-bottom:0px;'>{{ title }}</p><p class='matchOther'><span>{{gender}}</span><span style='display:none'>{{number}}</span></p></div></div>",
+    		props: ['time','gender','title','number']
+    	})
+    	
+		var vm = new Vue({
+			el: '#sidebar',
+			data: {
+				matches:matches
+			}
+		})
+    	function detailShow(target){
+    		var number = target.lastChild.lastChild.lastChild.textContent;
+    		window.localStorage.setItem("number", number);
+    		window.location.href = "match-result.html";
+    	}
+    	
+    	var msg = "[[${msg}]]";
+    	console.log(msg);
+    </script>
 </body>
 
 </html>

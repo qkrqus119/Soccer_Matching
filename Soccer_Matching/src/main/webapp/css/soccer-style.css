@@ -138,6 +138,10 @@ ul {
     margin-left: 110px;
 }
 
+#sidebar .contents:hover{
+	cursor:pointer;
+}
+
 footer {
     height: 8vh;
     width: 100%;

@@ -32,11 +32,11 @@ public class MatchBoardDAOImpl implements MatchBoardDAO {
 	@Override
 	public void create(MatchBoardDTO matchBoardDTO) {
 		jdbcTemplate.update(
-				"insert into match_board (author, address, detail_address, place_name, date, start_time, start_time_minutes, end_time, end_time_minutes, game_type, gender, number_appliable, x, y) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				"insert into match_board (author, address, detail_address, place_name, date, start_time, start_time_minutes, end_time, end_time_minutes, game_type, gender, detail_info, number_appliable, x, y) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				matchBoardDTO.getAuthor(), matchBoardDTO.getAddress(), matchBoardDTO.getDetailAddress(),
 				matchBoardDTO.getPlaceName(), matchBoardDTO.getDate(), matchBoardDTO.getStartTime(),
 				matchBoardDTO.getStartTimeMinutes(), matchBoardDTO.getEndTime(), matchBoardDTO.getEndTimeMinutes(),
-				matchBoardDTO.getGameType(), matchBoardDTO.getGender(), matchBoardDTO.getNumberAppliable(),
+				matchBoardDTO.getGameType(), matchBoardDTO.getGender(), matchBoardDTO.getDetailInfo(), matchBoardDTO.getNumberAppliable(),
 				matchBoardDTO.getX(), matchBoardDTO.getY());
 	}
 

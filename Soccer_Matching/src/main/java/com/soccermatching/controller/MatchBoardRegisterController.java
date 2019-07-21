@@ -24,11 +24,14 @@ public class MatchBoardRegisterController {
 	
 	@PostMapping
 	public String register(MatchBoardDTO matchBoardDTO, RedirectAttributes redirectAttributes) {
+		System.out.println(matchBoardDTO);
+		matchBoardDTO.setAuthor(1);
+		
 		matchBoardDAO.create(matchBoardDTO);
 		
-		redirectAttributes.addFlashAttribute("msg", 1);
+		//redirectAttributes.addFlashAttribute("msg", 1);
 		
-		return "redirect:main";
+		return "redirect:main?msg=1";
 	}
 
 }
