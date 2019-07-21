@@ -1,25 +1,179 @@
-// 마커를 담을 배열입니다
+var address = document.getElementById("address");
+var detailedAddress = document.getElementById("detailedAddress");
+var start_time = document.getElementById("start_time");
+var start_time_minutes = document.getElementById("start_time_minutes");
+var end_time= document.getElementById("end_time");
+var end_time_minutes = document.getElementById("end_time_minutes");
+var game_type = document.getElementById("game_type");
+var gender = document.getElementById("gender");
+var number_appliable = document.getElementById("number_appliable");
+var detailInfo = document.getElementById("detailInfo");
+
+var number;
+var map;
+var o_address;
+var o_detailedAddress;
+var o_start_time;
+var o_start_time_minutes;
+var o_end_time;
+var o_end_time_minutes;
+var o_game_type;
+var o_gender;
+var o_number_appliable;
+var o_detailInfo;
+var o_x;
+var o_y;
 var markers = [];
-
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };  
-
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places();  
 
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-// 키워드로 장소를 검색합니다
-searchPlaces();
+var mapContainer = document.getElementById('map'); // 지도를 표시할 
 
-// 키워드 검색을 요청하는 함수입니다
+
+(function(){
+	number = window.localStorage.getItem("number"); 
+    var request = new XMLHttpRequest();
+    request.open("POST", "api?number="+ number, true);
+    request.onreadystatechange = dataParsing;
+    request.send(null);
+    function dataParsing(){
+        if(request.readyState == 4 && request.status == 200){
+            var json = JSON.parse(request.responseText);
+            number = json.number;
+            o_address = json.address;
+            o_detailedAddress = json.detailedAddress;
+            o_start_time = json.start_time;
+            o_start_time_minutes = json.start_time_minutes;
+            o_end_time = json.end_time;
+            o_end_time_minutes = json.end_time_minutes;
+            o_game_type = json.game_type;
+            o_gender = json.gender;
+            o_number_appliable = json.number_appliable;
+            o_detailInfo = json.detail_Info;
+            o_x = json.x;
+            o_y = json.y;
+
+            address.value = o_address;
+            detailedAddress.value = o_detailedAddress;
+            start_time.value = o_start_time;
+            start_time_minutes.value = o_start_time_minutes;
+            end_time.value = o_end_time;
+            end_time_minutes.value = o_end_time_minutes;
+            game_type.value = o_game_type;
+            gender.value = o_gender;
+            number_appliable.value = o_number_appliable;
+            detailInfo.value = o_detailInfo;
+            mapOnlyMarker(o_y, o_x);
+        } else{
+            alert("네트워크 에러 발생");
+        }
+    }
+})();
+
+function editMode(){
+	
+	var date = document.getElementById("fixedDate");
+	date.id = "date";
+	
+	var calendarLocation = "js/match-datepicker.js";
+	var newScript = document.createElement('script');
+	newScript.setAttribute('src', calendarLocation);
+	document.body.insertBefore(newScript, document.body.lastChild);
+	
+	var edit = document.getElementById("edit");
+	var submit = document.getElementById("submit");
+	var cancel = document.getElementById("cancel");
+	var mapSearch = document.getElementById("menu_wrap")
+	
+	edit.style.display = "none";
+	submit.style.display = "";
+	cancel.style.display = "";
+	mapSearch.style.display = "";
+	
+	detailAddress.removeAttribute("disabled");
+	start_time.removeAttribute("disabled");
+	start_time_minutes.removeAttribute("disabled");
+	end_time.removeAttribute("disabled");
+	end_time_minutes.removeAttribute("disabled");
+	game_type.removeAttribute("disabled");
+	gender.removeAttribute("disabled");
+	number_appliable.removeAttribute("disabled");
+    detailInfo.removeAttribute("disabled");
+    
+    mapSearching();
+}
+
+function cancelMode(){
+	var date = document.getElementById("date");
+	date.id = "fixedDate";
+	var scriptNodes = document.getElementsByTagName("script");
+	scriptNodes.item(scriptNodes.length-1).remove();
+	var edit = document.getElementById("edit");
+	var submit = document.getElementById("submit");
+	var cancel = document.getElementById("cancel");
+	var mapSearch = document.getElementById("menu_wrap")
+	
+	edit.style.display = "";
+	submit.style.display = "none";
+	cancel.style.display = "none";
+	mapSearch.style.display = "none";
+	
+    address.value = o_address;
+    detailedAddress.value = o_detailedAddress;
+    start_time.value = o_start_time;
+    start_time_minutes.value = o_start_time_minutes;
+    end_time.value = o_end_time;
+    end_time_minutes.value = o_end_time_minutes;
+    game_type.value = o_game_type;
+    gender.value = o_gender;
+    number_appliable.value = o_number_appliable;
+    detailInfo.value = o_detailInfo;
+
+	detailAddress.setAttribute("disabled","disabled");
+	start_time.setAttribute("disabled","disabled");
+	start_time_minutes.setAttribute("disabled","disabled");
+	end_time.setAttribute("disabled","disabled");
+	end_time_minutes.setAttribute("disabled","disabled");
+	game_type.setAttribute("disabled","disabled");
+	gender.setAttribute("disabled","disabled");
+	number_appliable.setAttribute("disabled","disabled");
+    detailInfo.setAttribute("disabled", "disabled");
+    mapOnlyMarker(o_y, o_x);
+}
+
+function mapOnlyMarker(o_y, o_x){
+    // 마커를 담을 배열입니다
+    mapOption = {
+        center: new kakao.maps.LatLng(o_y, o_x), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };      
+    // 지도를 생성합니다    
+    map = new kakao.maps.Map(mapContainer, mapOption); 
+    var markerPosition  = new kakao.maps.LatLng(o_y, o_x); 
+    // 마커를 생성합니다
+    var marker = new kakao.maps.Marker({
+        position: markerPosition
+    });
+    // 마커가 지도 위에 표시되도록 설정합니다
+    marker.setMap(map);
+}
+
+function mapSearching(){
+	// 마커를 담을 배열입니다
+
+    mapOption = {
+	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };  
+
+	// 지도를 생성합니다    
+	map = new kakao.maps.Map(mapContainer, mapOption); 
+}
+
+//키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
 	var keyword = document.getElementById('keyword').value;
 	
@@ -149,17 +303,13 @@ function addMarker(position, idx, title) {
 
     return marker;
 }
-
 // 지도 위에 표시되고 있는 마커를 모두 제거합니다
 function removeMarker() {
     for ( var i = 0; i < markers.length; i++ ) {
         markers[i].setMap(null);
     }   
     markers = [];
-    
-
 }
-
 // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
 function displayPagination(pagination) {
     var paginationEl = document.getElementById('pagination'),
@@ -244,7 +394,6 @@ function markerMove(marker, title, event){
 			} else{
 				document.getElementById("address").value = detailAddr;	
 			}
-            
         }
 	});
 }
