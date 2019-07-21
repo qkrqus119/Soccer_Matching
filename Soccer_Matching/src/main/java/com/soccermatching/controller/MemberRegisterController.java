@@ -25,11 +25,13 @@ public class MemberRegisterController {
 
 	@PostMapping
 	public String register(MemberDTO memberDTO, RedirectAttributes redirectAttributes) {
+		System.out.println(memberDTO);
+		
 		memberDAO.create(memberDTO);
 		
-		redirectAttributes.addFlashAttribute("msg", 1);
+		//redirectAttributes.addFlashAttribute("msg", 1);
 
-		return "redirect:/index";
+		return "redirect:/?msg=1";
 	}
 
 }

@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
 
+document.addEventListener('DOMContentLoaded', function() {
 
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ilkilling();
 })
 
-document.body.addEventListener('DOMSubtreeModified', function() {
+document.addEventListener('DOMSubtreeModified', function() {
     var ilremover = document.getElementsByClassName("fc-day-number");
     for (var i = 0; i < ilremover.length; i++) {
         ilremover[i].textContent = ilremover[i].textContent.replace("일", "");
@@ -93,7 +93,7 @@ function modalBody(info) {
     var container = document.getElementsByClassName("modal-body")[0];
     var contentsDiv = document.createElement("div"); // 한 경기 전체 컨테이너
     contentsDiv.setAttribute("class", "contentsDiv");
-    contentsDiv.setAttribute("onclick", "loadMatch()");
+    contentsDiv.setAttribute("onclick", "loadMatch(this)");
     var regOrApply = document.createElement("div"); // 등록경기인지 지원 경기인지
     regOrApply.textContent = "등록한 경기";
     regOrApply.setAttribute("class", "regOrApply");
@@ -123,6 +123,11 @@ function modalBody(info) {
         container.removeChild(container.firstChild);
     }
     container.appendChild(contentsDiv);
+    var numberNode = document.createElement("span");
+    var number = 1
+    numberNode.innerHTML = number;
+    numberNode.style.display = "none";
+    contentDiv.appendChild(numberNode);
 }
 
 function getTwoDigitMinutes(minutes) {
@@ -133,13 +138,8 @@ function getTwoDigitMinutes(minutes) {
     }
 }
 
-function loadMatch(date) {
-    var header = document.querySelector(".modal-title").textContent;
-    var year = header.substring(0, 4);
-    var month = header.substring(6, 7);
-    var date = header.substring(9, 11);
-    var time = document.querySelector(".timeDiv").textContent;
-
-    var cDate = year + "-" + getTwoDigitMinutes(month) + "-" + date + " " + time;
-    alert(cDate);
+function loadMatch(target) {
+	var number = target.lastChild.lastChild.textContent;
+	window.localStorage.setItem("number", number);
+    window.location.href = "match-result.html";
 }
